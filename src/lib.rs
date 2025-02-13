@@ -171,30 +171,100 @@ mod tests {
     #[test]
     fn test_gcj02_wgs84() {
         {
-            let coord_wgs84 = Coordinate::new(114.304569, 30.593354);
-            let expected_gcj02 = Coordinate::new(114.310012, 30.590943);
-            let coord_gcj02 = transform(coord_wgs84, CoordSystem::WGS84, CoordSystem::GCJ02);
-            assert!(coord_gcj02.is_ok());
-            let coord_gcj02 = coord_gcj02.unwrap();
-            println!("{} {}", coord_gcj02.lng, expected_gcj02.lat);
-            assert!((coord_gcj02.lng - expected_gcj02.lng).abs() < EPSILON);
-            assert!((coord_gcj02.lat - expected_gcj02.lat).abs() < EPSILON);
+            let from = Coordinate::new(114.304569, 30.593354);
+            let expected = Coordinate::new(114.310012, 30.590943);
+            let to = transform(from, CoordSystem::WGS84, CoordSystem::GCJ02);
+            assert!(to.is_ok());
+            let to = to.unwrap();
+            println!("{} {}", to.lng, to.lat);
+            assert!((to.lng - expected.lng).abs() < EPSILON);
+            assert!((to.lat - expected.lat).abs() < EPSILON);
         }
         {
-            let coord_wgs84 = Coordinate::new(116.407387, 39.904179);
-            let expected_gcj02 = Coordinate::new(116.413629, 39.905582);
-            let coord_gcj02 = transform(coord_wgs84, CoordSystem::WGS84, CoordSystem::GCJ02);
-            assert!(coord_gcj02.is_ok());
-            let coord_gcj02 = coord_gcj02.unwrap();
-            println!("{} {}", coord_gcj02.lng, expected_gcj02.lat);
-            assert!((coord_gcj02.lng - expected_gcj02.lng).abs() < EPSILON);
-            assert!((coord_gcj02.lat - expected_gcj02.lat).abs() < EPSILON);
+            let from = Coordinate::new(116.407387, 39.904179);
+            let expected = Coordinate::new(116.413629, 39.905582);
+            let to = transform(from, CoordSystem::WGS84, CoordSystem::GCJ02);
+            assert!(to.is_ok());
+            let to = to.unwrap();
+            println!("{} {}", to.lng, to.lat);
+            assert!((to.lng - expected.lng).abs() < EPSILON);
+            assert!((to.lat - expected.lat).abs() < EPSILON);
         }
 
         {
-            let coord_wgs84 = Coordinate::new(61.972426,31.998164);
-            let coord_gcj02 = transform(coord_wgs84, CoordSystem::WGS84, CoordSystem::GCJ02);
-            assert!(coord_gcj02.is_err());
+            let from = Coordinate::new(61.972426, 31.998164);
+            let to = transform(from, CoordSystem::WGS84, CoordSystem::GCJ02);
+            assert!(to.is_err());
+        }
+
+        {
+            let expected = Coordinate::new(114.304569, 30.593354);
+            let from = Coordinate::new(114.310012, 30.590943);
+            let to = transform(from, CoordSystem::GCJ02, CoordSystem::WGS84);
+            assert!(to.is_ok());
+            let to = to.unwrap();
+            println!("{} {}", to.lng, to.lat);
+            assert!((to.lng - expected.lng).abs() < EPSILON);
+            assert!((to.lat - expected.lat).abs() < EPSILON);
+        }
+        {
+            let expected = Coordinate::new(116.407387, 39.904179);
+            let from = Coordinate::new(116.413629, 39.905582);
+            let to = transform(from, CoordSystem::GCJ02, CoordSystem::WGS84);
+            assert!(to.is_ok());
+            let to = to.unwrap();
+            println!("{} {}", to.lng, to.lat);
+            assert!((to.lng - expected.lng).abs() < EPSILON);
+            assert!((to.lat - expected.lat).abs() < EPSILON);
+        }
+    }
+
+    #[test]
+    fn test_gcj02_bd09() {
+        {
+            let from = Coordinate::new(114.304569, 30.593354);
+            let expected = Coordinate::new(114.311152, 30.599019);
+            let to = transform(from, CoordSystem::GCJ02, CoordSystem::BD09);
+            assert!(to.is_ok());
+            let to = to.unwrap();
+            println!("{} {}", to.lng, to.lat);
+            assert!((to.lng - expected.lng).abs() < EPSILON);
+            assert!((to.lat - expected.lat).abs() < EPSILON);
+        }
+        {
+            let from = Coordinate::new(116.407387, 39.904179);
+            let expected = Coordinate::new(116.413772, 39.910501);
+            let to = transform(from, CoordSystem::GCJ02, CoordSystem::BD09);
+            assert!(to.is_ok());
+            let to = to.unwrap();
+            println!("{} {}", to.lng, to.lat);
+            assert!((to.lng - expected.lng).abs() < EPSILON);
+            assert!((to.lat - expected.lat).abs() < EPSILON);
+        }
+        {
+            let from = Coordinate::new(61.972426, 31.998164);
+            let to = transform(from, CoordSystem::WGS84, CoordSystem::GCJ02);
+            assert!(to.is_err());
+        }
+        {
+            let expected = Coordinate::new(114.304569, 30.593354);
+            let from = Coordinate::new(114.311152, 30.599019);
+            let to = transform(from, CoordSystem::BD09, CoordSystem::GCJ02);
+            assert!(to.is_ok());
+            let to = to.unwrap();
+            println!("{} {}", to.lng, to.lat);
+            assert!((to.lng - expected.lng).abs() < EPSILON);
+            assert!((to.lat - expected.lat).abs() < EPSILON);
+        }
+        {
+            let expected = Coordinate::new(116.407387, 39.904179);
+            let from = Coordinate::new(116.413772, 39.910501);
+            let to = transform(from, CoordSystem::BD09, CoordSystem::GCJ02);
+            assert!(to.is_ok());
+            let to = to.unwrap();
+            println!("{} {}", to.lng, to.lat);
+            assert!((to.lng - expected.lng).abs() < EPSILON);
+            assert!((to.lat - expected.lat).abs() < EPSILON);
         }
     }
 }
