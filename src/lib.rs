@@ -267,4 +267,53 @@ mod tests {
             assert!((to.lat - expected.lat).abs() < EPSILON);
         }
     }
+
+    #[test]
+    fn test_wgs84_bd09() {
+        {
+            let expected = Coordinate::new(114.304569, 30.593354);
+            let from = Coordinate::new(114.316583, 30.596644);
+            let to = transform(from, CoordSystem::BD09, CoordSystem::WGS84);
+            assert!(to.is_ok());
+            let to = to.unwrap();
+            println!("{} {}", to.lng, to.lat);
+            assert!((to.lng - expected.lng).abs() < EPSILON);
+            assert!((to.lat - expected.lat).abs() < EPSILON);
+        }
+        {
+            let expected = Coordinate::new(116.407387, 39.904178);
+            let from = Coordinate::new(116.420033, 39.911844);
+            let to = transform(from, CoordSystem::BD09, CoordSystem::WGS84);
+            assert!(to.is_ok());
+            let to = to.unwrap();
+            println!("{} {}", to.lng, to.lat);
+            assert!((to.lng - expected.lng).abs() < EPSILON);
+            assert!((to.lat - expected.lat).abs() < EPSILON);
+        }
+        {
+            let from = Coordinate::new(61.972426, 31.998164);
+            let to = transform(from, CoordSystem::WGS84, CoordSystem::GCJ02);
+            assert!(to.is_err());
+        }
+        {
+            let from = Coordinate::new(114.304569, 30.593354);
+            let expected = Coordinate::new(114.316583, 30.596644);
+            let to = transform(from, CoordSystem::WGS84, CoordSystem::BD09);
+            assert!(to.is_ok());
+            let to = to.unwrap();
+            println!("{} {}", to.lng, to.lat);
+            assert!((to.lng - expected.lng).abs() < EPSILON);
+            assert!((to.lat - expected.lat).abs() < EPSILON);
+        }
+        {
+            let from = Coordinate::new(116.407387, 39.904179);
+            let expected = Coordinate::new(116.420033, 39.911844);
+            let to = transform(from, CoordSystem::WGS84, CoordSystem::BD09);
+            assert!(to.is_ok());
+            let to = to.unwrap();
+            println!("{} {}", to.lng, to.lat);
+            assert!((to.lng - expected.lng).abs() < EPSILON);
+            assert!((to.lat - expected.lat).abs() < EPSILON);
+        }
+    }
 }
