@@ -190,5 +190,11 @@ mod tests {
             assert!((coord_gcj02.lng - expected_gcj02.lng).abs() < EPSILON);
             assert!((coord_gcj02.lat - expected_gcj02.lat).abs() < EPSILON);
         }
+
+        {
+            let coord_wgs84 = Coordinate::new(61.972426,31.998164);
+            let coord_gcj02 = transform(coord_wgs84, CoordSystem::WGS84, CoordSystem::GCJ02);
+            assert!(coord_gcj02.is_err());
+        }
     }
 }
