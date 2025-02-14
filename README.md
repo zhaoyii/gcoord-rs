@@ -10,7 +10,7 @@ gcoord = "0.1.0"
 
 ## 示例
 
-```Rust
+```rust
 use gcoord::{transform, Coordinate, CoordSystem};
 let from = Coordinate::new(114.304569, 30.593354);
 let to = transform(from, CoordSystem::WGS84, CoordSystem::GCJ02);
