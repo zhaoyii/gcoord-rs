@@ -3,5 +3,7 @@ name = "gcoord"
 version = "0.1.0"
 edition = "2021"
 authors = ["Zhaoyii <532708564@QQ.com>"]
+description = "地理坐标系转换工具：提供WGS84、GCJ02、BD09坐标系之间的转换。（Geographic Coordinate System Conversion Tool: Offers conversion between WGS84, GCJ02, and BD09 coordinate systems.）"
+license = "MIT"
 
 [dependencies]
