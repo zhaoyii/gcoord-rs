@@ -22,7 +22,7 @@ let to = transform(from, CoordSystem::WGS84, CoordSystem::GCJ02);
 | CRS                | 坐标格式   | 说明    |
 | --------           | --------- | ----- |
 | gcoord.WGS84       | [lng,lat] | WGS-84坐标系，GPS设备获取的经纬度坐标   |
-| gcoord.GCJ02       | [lng,lat] | GCJ-02坐标系，google中国地图、soso地图、aliyun地图、mapabc地图和高德地图所用的经纬度坐标   |
+| gcoord.GCJ02       | [lng,lat] | GCJ-02坐标系，google中国地图、soso地图、aliyun地图、mapabc地图、高德地图、腾讯地图所用的经纬度坐标   |
 | gcoord.BD09        | [lng,lat] | BD-09坐标系，百度地图采用的经纬度坐标    |
 
 
