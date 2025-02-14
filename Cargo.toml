@@ -2,5 +2,6 @@
 name = "gcoord"
 version = "0.1.0"
 edition = "2021"
+authors = ["Zhaoyii <532708564@QQ.com>"]
 
 [dependencies]
